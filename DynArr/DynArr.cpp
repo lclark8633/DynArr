@@ -50,20 +50,66 @@ bool DynArr::InsertItem(int val, int r, int c) {
 
 // Remove Item
 bool DynArr::RemoveItem(int &val) {
-	cout << "Remove value: " << val << " at [" << r << "," << c << "]" << endl;
-	//ptr[r][c] = 0;
-	return false;
+	// Check if cursor is valid
+	if (rowC < 0 || colC < 0 || rowC >= rowA || colC >= colA)
+	{
+		return false;
+	}
+	
+	// Get value at cursor
+	v = dynarr[rowC][colC];
+	
+	// Reset value to 0
+	dynarr[rowC][colC] = 0;
+	
+	return true;
 }
 
 // Search Item
 bool DynArr::SearchItem(int val, int &r, int &c) {
-	cout << "Searching for value: " << val << endl;
+	// Check cursors
+	if (rowC == -1 && colC == -1)
+	{
+		return false;
+	}
+	
+	// Search array
+	for (int i = 0; i < rowA; i++)
+	{
+		for (int j = 0; j < colA; j++)
+		{
+			if (dynarr[i][j] == v)
+			{
+				// Found
+				r = i;
+				c = j;
+	
+				// Move cursor to position
+				rowC = i;
+				colC = j;
+	
+				return true;
+			}
+		}
+	}
+	
+	// Not Found
+	rowC = 0;
+	colC = 0;
+	
 	return false;
 }
 
 // Print Col Major
 void DynArr::PrintColMajor() {
-	cout << "Printing Col Major" << endl;
+	for (int j = 0; j < colA; j++)
+	{
+		for (int i = 0; i < rowA; i++)
+		{
+			cout << dynarr[i][j] << " ";
+		}
+		cout << endl;
+	}
 }
 
 // Print Ros Major 
