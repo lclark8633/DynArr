@@ -27,7 +27,7 @@ int main() {
 			cin >> val;
 			cin >> r;
 			cin >> c;
-			cout << "Inserting" << val << " at [" << r << "," << c << "]..." << endl;
+			cout << "Inserting " << val << " at [" << r << "," << c << "]..." << endl;
 
 			result = arr.InsertItem(val, r, c);
 			if (result) {
