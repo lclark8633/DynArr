@@ -57,7 +57,7 @@ bool DynArr::RemoveItem(int &val) {
 	}
 	
 	// Get value at cursor
-	v = dynarr[r][c];
+	val = dynarr[r][c];
 	
 	// Reset value to 0
 	dynarr[r][c] = 0;
