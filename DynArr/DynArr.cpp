@@ -57,10 +57,10 @@ bool DynArr::RemoveItem(int &val) {
 	}
 	
 	// Get value at cursor
-	val = dynarr[r][c];
+	val = ptr[r][c];
 	
 	// Reset value to 0
-	dynarr[r][c] = 0;
+	ptr[r][c] = 0;
 	
 	return true;
 }
@@ -78,7 +78,7 @@ bool DynArr::SearchItem(int val, int &r, int &c) {
 	{
 		for (int j = 0; j < cols; j++)
 		{
-			if (dynarr[i][j] == v)
+			if (ptr[i][j] == val)
 			{
 				// Found
 				r = i;
@@ -106,7 +106,7 @@ void DynArr::PrintColMajor() {
 	{
 		for (int i = 0; i < rows; i++)
 		{
-			cout << dynarr[i][j] << " ";
+			cout << ptr[i][j] << " ";
 		}
 		cout << endl;
 	}
