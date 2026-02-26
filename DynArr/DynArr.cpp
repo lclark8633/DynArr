@@ -51,16 +51,16 @@ bool DynArr::InsertItem(int val, int r, int c) {
 // Remove Item
 bool DynArr::RemoveItem(int &val) {
 	// Check if cursor is valid
-	if (rowC < 0 || colC < 0 || rowC >= rowA || colC >= colA)
+	if (r < 0 || c < 0 || r >= rows || c >= cols)
 	{
 		return false;
 	}
 	
 	// Get value at cursor
-	v = dynarr[rowC][colC];
+	v = dynarr[r][c];
 	
 	// Reset value to 0
-	dynarr[rowC][colC] = 0;
+	dynarr[r][c] = 0;
 	
 	return true;
 }
@@ -68,15 +68,15 @@ bool DynArr::RemoveItem(int &val) {
 // Search Item
 bool DynArr::SearchItem(int val, int &r, int &c) {
 	// Check cursors
-	if (rowC == -1 && colC == -1)
+	if (this->r == -1 && this->c == -1)
 	{
 		return false;
 	}
 	
 	// Search array
-	for (int i = 0; i < rowA; i++)
+	for (int i = 0; i < rows; i++)
 	{
-		for (int j = 0; j < colA; j++)
+		for (int j = 0; j < cols; j++)
 		{
 			if (dynarr[i][j] == v)
 			{
@@ -85,8 +85,8 @@ bool DynArr::SearchItem(int val, int &r, int &c) {
 				c = j;
 	
 				// Move cursor to position
-				rowC = i;
-				colC = j;
+				this->r = i;
+				this->c = j;
 	
 				return true;
 			}
@@ -94,17 +94,17 @@ bool DynArr::SearchItem(int val, int &r, int &c) {
 	}
 	
 	// Not Found
-	rowC = 0;
-	colC = 0;
+	this->r = 0;
+	this->c = 0;
 	
 	return false;
 }
 
 // Print Col Major
 void DynArr::PrintColMajor() {
-	for (int j = 0; j < colA; j++)
+	for (int j = 0; j < cols; j++)
 	{
-		for (int i = 0; i < rowA; i++)
+		for (int i = 0; i < rows; i++)
 		{
 			cout << dynarr[i][j] << " ";
 		}
@@ -112,7 +112,7 @@ void DynArr::PrintColMajor() {
 	}
 }
 
-// Print Ros Major 
+// Print Rows Major 
 void DynArr::PrintRowMajor() {
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
