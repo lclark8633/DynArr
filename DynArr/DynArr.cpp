@@ -67,11 +67,6 @@ bool DynArr::RemoveItem(int &val) {
 
 // Search Item
 bool DynArr::SearchItem(int val, int &r, int &c) {
-	// Check cursors
-	if (this->r == -1 && this->c == -1)
-	{
-		return false;
-	}
 	
 	// Search array
 	for (int i = 0; i < rows; i++)
