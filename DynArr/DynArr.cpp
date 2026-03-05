@@ -17,6 +17,7 @@ DynArr::DynArr(int rows, int cols) {
 	this->cols = cols;
 	r = -1;
 	c = -1;
+	size = rows * cols;
 
 	// Allocating rows
 	ptr = new int* [rows];
@@ -30,6 +31,8 @@ DynArr::DynArr(int rows, int cols) {
 	}
 	cout << "DynArr created: " << rows << "x" << cols << " 2D array" << endl;
 }
+
+// Need constructor that takes values for array size
 
 /**************************************************************
  * Function: DynArr::~DynArr
