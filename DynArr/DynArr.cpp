@@ -194,9 +194,23 @@ DynArr::DynArr(const DynArr& other){
  * Return: DynArr&  (reference to the current object)
  * Input:  const DynArr &other - source DynArr to assign from
  * Output: Assigns the contents of other into *this and returns *this.
- * author: Liam Clark
+ * author: John Grevins
  **************************************************************/
 DynArr& DynArr::operator=(const DynArr& other){
-	cout << "Assignmengt operator" << endl;
+	if(this == &other) // check for self-assignment
+	{
+		return *this;
+	}
+
+	delete[] ptr; // memory leak
+
+	size = other.size;
+	ptr = new int[size];
+
+	for(int i = 0; i < size; i++)
+	{
+		ptr[i] = other.ptr[i];
+	}
+
 	return *this;
 }
