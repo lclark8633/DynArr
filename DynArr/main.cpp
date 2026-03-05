@@ -11,15 +11,31 @@ using namespace std;
 const string STARS = "**********************************************";
 
 int main() {
-	DynArr arr(3, 3);
-
 	char command;
 	int val, r, c;
 	bool result;
+	cout << STARS << endl;
+	cout << "Enter the size of your 2D array" << endl;
+	cout << "Number of rows: ";
+	cin >> r;
+	cout << "Number of cols: ";
+	cin >> c;
+	cout << STARS << endl;
+	DynArr arr(r, c);
 
-	cout << "Enter a command (+, -, ?, R, C, or Q to quit): ";
+	cout << STARS << endl;
+	cout << "Command List :" << endl;
+	cout << "+ <-- Insert command (val, x pos, y pos)" << endl;
+	cout << "- <-- Remove command (removes value at cursor)" << endl;
+	cout << "? <-- Search command (searchVal)" << endl;
+	cout << "R/r <-- Print Row Major" << endl;
+	cout << "C/c <-- Print Col Major" << endl;
+	cout << "Q/q <-- Quit loop" << endl;
+	cout << "M/m <-- Menu command" << endl;
+	cout << STARS << endl;
 	
 	do {
+		cout << "Enter a command : ";
 		cin >> command;
 
 		// Insert command
@@ -70,6 +86,17 @@ int main() {
 			cout << "Column Major Output: " << endl;
 			arr.PrintColMajor();
 		}
+		// Print Menu
+		else if (command == 'M' || command == 'm') {
+			cout << "Command List :" << endl;
+			cout << "+ <-- Insert command (val, x pos, y pos)" << endl;
+			cout << "- <-- Remove command (removes value at cursor)" << endl;
+			cout << "? <-- Search command (searchVal)" << endl;
+			cout << "R/r <-- Print Row Major" << endl;
+			cout << "C/c <-- Print Col Major" << endl;
+			cout << "Q/q <-- Quit loop" << endl;
+			cout << "M/m <-- Menu command" << endl;
+		}
 		// Quit loop
 		else if (command == 'Q' || command == 'q') {
 			cout << "Ending loop..." << endl;
@@ -77,7 +104,7 @@ int main() {
 		// Handling invalid commands
 		else {
 			cout << "Invalid command. please choose from the following: " << endl;
-			cout << "(+, -, ?, R, C, or Q to quit)";
+			cout << "(+, -, ?, R, C, M, or Q to quit)";
 		}
 		// Spacer 
 		cout << STARS << endl;
