@@ -8,6 +8,7 @@ private:
 	int cols;	// col allocation
 	int r;		// row cursor
 	int c;		// col cursor
+	int size;   // arr size
 public:
 	// Constructor/Destructor 
 	DynArr(int rows, int cols);
