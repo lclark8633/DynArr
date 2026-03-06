@@ -181,15 +181,24 @@ void DynArr::PrintRowMajor() {
  * Return: void (constructor)
  * Input:  const DynArr &other - source DynArr to copy from
  * Output: Constructs a DynArr as a copy of other.
- * author: Liam Clark
+ * author: Jay Neill
  **************************************************************/
 DynArr::DynArr(const DynArr& other){
 	cout << "Copy constrcutor" << endl;
-	ptr = nullptr;
-	rows = 0;
-	cols = 0;
-	r = -1;
-	c = -1;
+	rows = other.rows;       // Copy basic info
+	cols = other.cols;
+	r = other.r;
+	c = other.c;
+	size = other.size;
+// Allocate fresh rows
+	ptr = new int*[rows];
+	
+	for (int i = 0; i < rows; i++) {
+		ptr[i] = new int[cols];
+		// Copy each value over one by one
+		for (int j = 0; j < cols; j++)
+			ptr[i][j] = other.ptr[i][j];
+	}
 }
 
 /**************************************************************
@@ -197,23 +206,34 @@ DynArr::DynArr(const DynArr& other){
  * Return: DynArr&  (reference to the current object)
  * Input:  const DynArr &other - source DynArr to assign from
  * Output: Assigns the contents of other into *this and returns *this.
- * author: John Grevins
+ * author: John Grevins and Jay Neill
  **************************************************************/
 DynArr& DynArr::operator=(const DynArr& other){
 	if(this == &other) // check for self-assignment
 	{
 		return *this;
 	}
+// Self-assignment guard (don't copy yourself)
+for (int i = 0; i < rows; i++)
+    delete[] ptr[i];    // delete each row
+delete[] ptr;   // delete the outer array
 
-	delete[] ptr; // memory leak
+// Copy basic info
+rows = other.rows;
+cols = other.cols;
+r = other.r;
+c = other.c;
+size = other.size;
+	
+// Allocate fresh rows (don't share memory with other)
+ptr = new int*[rows];
+for (int i = 0; i < rows; i++) {
+	// Allocate fresh column for each row
+    ptr[i] = new int[cols];
+    for (int j = 0; j < cols; j++)
+        ptr[i][j] = other.ptr[i][j];
+}
 
-	size = other.size;
-	ptr = new int[size];
-
-	for(int i = 0; i < size; i++)
-	{
-		ptr[i] = other.ptr[i];
-	}
-
+// Return reference to this object
 	return *this;
 }
