@@ -1,8 +1,6 @@
 /*
-* Name: Liam Clark
+* Names: Liam Clark, Jay Neill, Nathan Steward, John Grevins
 * Class: CS-355
-* Date: 2/23/26
-* Assignment: Pass 1
 */
 #include <iostream>
 #include "DynArr.h"
