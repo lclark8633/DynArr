@@ -15,6 +15,11 @@ private:
     int hashFunction(int val);
 public:
     HashTable();
+    ~HashTable();
+
+    void insert(int val);
+    bool HashSearch(int val);
+
     void PrintHashTable();
 };
 
