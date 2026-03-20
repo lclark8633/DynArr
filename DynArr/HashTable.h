@@ -18,6 +18,7 @@ public:
     ~HashTable();
 
     void insert(int val);
+    bool remove(int val);
     bool HashSearch(int val);
 
     void PrintHashTable();
