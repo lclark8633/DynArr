@@ -17,6 +17,30 @@ HashTable::HashTable() {
 }
 
 /**************************************************************
+ * Function: ~HashTable()
+ * Return: void (destructor)
+ * Input:  none
+ * Output: Destroys table
+ * author: John Grevins
+ **************************************************************/
+HashTable::~HashTable()
+{
+    for (int i = 0; i < TABLE_SIZE; i++)
+    {
+        Node* curr = hashTable[i];
+        while (curr != nullptr) // check if destroyed
+        {
+            Node* temp = curr;
+            curr = curr->next; // next value
+            
+            delete temp; // delete previous value
+        }
+    }
+
+    cout << "Hash table destroyed" << endl;
+}
+
+/**************************************************************
  * Function: HashTable::hashFunction
  * Return: int - the bucket index for the given value
  * Input:  int val - value to hash
@@ -25,6 +49,49 @@ HashTable::HashTable() {
  **************************************************************/
 int HashTable::hashFunction(int val) {
     return val % TABLE_SIZE;
+}
+
+/**************************************************************
+ * Function: insert
+ * Return: none
+ * Input:  int val - value to insert
+ * Output: Inserts val into beginning of bucket
+ * author: John Grevins
+ **************************************************************/
+void HashTable::insert(int val)
+{
+    int index = hashFunction(val);
+
+    Node* newNode = new Node(val);
+
+    // Insert at beginning
+    newNode->next = hashTable[index]; // preserve next node
+    hashTable[index] = newNode; // insert value
+
+    cout << "Inserted " << val << " into bucket " << index << endl;
+}
+
+/**************************************************************
+ * Function: HashSearch
+ * Return: bool
+ * Input:  int val - value to search for
+ * Output: Returns true if value was found and false if not
+ * author: John Grevins
+ **************************************************************/
+bool HashTable::HashSearch(int val)
+{
+    int index = hashFunction(val);
+    Node* curr = hashTable[index];
+
+    while (curr != nullptr) // while val is not found
+    {
+        if (curr->data == val) // check for value
+        {
+            return true;
+        }
+        curr = curr->next; // next value
+    }
+    return false;
 }
 
 /**************************************************************
