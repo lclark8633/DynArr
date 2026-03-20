@@ -17,7 +17,7 @@ int main() {
 	cout << "Choose hash table type:" << endl;
 	cout << "1 <-- Linked List Chaining" << endl;
 	cout << "2 <-- Linear Probing" << endl;
-	cout << "3 <-- BST Buckets" << endl;
+	cout << "3 <-- Binary Search Buckets" << endl;
 	cout << "Enter choice: ";
 	cin >> tableChoice;
 	cout << STARS << endl;
