@@ -72,6 +72,39 @@ void HashTable::insert(int val)
 }
 
 /**************************************************************
+ * Function: remove
+ * Return: bool
+ * Input:  int val - value to remove
+ * Output: removes value
+ * author: Liam Clark
+ **************************************************************/
+bool HashTable::remove(int val)
+{
+    int index = hashFunction(val);
+    Node* curr = hashTable[index];
+    Node* prev = nullptr;
+
+    while (curr != nullptr)
+    {
+        if (curr->data == val)
+        {
+            if (prev == nullptr)
+                hashTable[index] = curr->next;
+            else
+                prev->next = curr->next;
+
+            delete curr;
+            return true;
+        }
+
+        prev = curr;
+        curr = curr->next;
+    }
+
+    return false;
+}
+
+/**************************************************************
  * Function: HashSearch
  * Return: bool
  * Input:  int val - value to search for
