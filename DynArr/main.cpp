@@ -10,24 +10,32 @@ const string STARS = "**********************************************";
 
 int main() {
 	char command;
-	int val, r, c;
+	char tableChoice;
+	int val, index, size;
 	bool result;
 	cout << STARS << endl;
-	cout << "Enter the size of your 2D array" << endl;
-	cout << "Number of rows: ";
-	cin >> r;
-	cout << "Number of cols: ";
-	cin >> c;
+	cout << "Choose hash table type:" << endl;
+	cout << "1 <-- Linked List Chaining" << endl;
+	cout << "2 <-- Linear Probing" << endl;
+	cout << "3 <-- BST Buckets" << endl;
+	cout << "Enter choice: ";
+	cin >> tableChoice;
 	cout << STARS << endl;
-	DynArr arr(r, c);
+
+	HashTable linkedTable;
+
+	size = 10;
+	HashTableLP lpTable(size);
+
+	HashTableBST bstTable;
 
 	cout << STARS << endl;
 	cout << "Command List :" << endl;
-	cout << "+ <-- Insert command (val, x pos, y pos)" << endl;
-	cout << "- <-- Remove command (removes value at cursor)" << endl;
-	cout << "? <-- Search command (searchVal)" << endl;
-	cout << "R/r <-- Print Row Major" << endl;
-	cout << "C/c <-- Print Col Major" << endl;
+	cout << "+ <-- Insert command (val)" << endl;
+	cout << "- <-- Remove command (val)" << endl;
+	cout << "? <-- Search command (val)" << endl;
+	cout << "P/p <-- Print hash table" << endl;
+	cout << "L/l <-- Print load factor (linear probing only)" << endl;
 	cout << "Q/q <-- Quit loop" << endl;
 	cout << "M/m <-- Menu command" << endl;
 	cout << STARS << endl;
@@ -39,50 +47,112 @@ int main() {
 		// Insert command
 		if (command == '+') {
 			cin >> val;
-			cin >> r;
-			cin >> c;
-			cout << "Inserting " << val << " at [" << r << "," << c << "]..." << endl;
-
-			result = arr.InsertItem(val, r, c);
-			if (result) {
+			cout << "Inserting " << val << "..." << endl;
+			
+			if (tableChoice == '1') {
+				linkedTable.insert(val);
+				cout << "Done" << endl;
+			}
+			else if (tableChoice == '2') {
+				result = lpTable.InsertItem(val);
+				if (result)
+					cout << "Done" << endl;
+				else
+					cout << "Not Done" << endl;
+			}
+			else if (tableChoice == '3') {
+				bstTable.insert(val);
 				cout << "Done" << endl;
 			}
 			else {
-				cout << "Not Done" << endl;
+				cout << "Invalid table type selection." << endl;
 			}
 		}
 		// Remove command
 		else if (command == '-') {
-			cout << "Removing value at cursor..." << endl;
-			result = arr.RemoveItem(val);
-			if (result) {
-				cout << "Removed: " << val << endl;
+			cin >> val;
+			cout << "Removing " << val << "..." << endl;
+			
+			if (tableChoice == '1') {
+				result = linkedTable.remove(val);
+				if (result)
+					cout << "Removed" << endl;
+				else
+					cout << "Not Done" << endl;
+			}
+			else if (tableChoice == '2') {
+				result = lpTable.RemoveItem(val);
+				if (result)
+					cout << "Removed" << endl;
+				else
+					cout << "Not Done" << endl;
+			}
+			else if (tableChoice == '3') {
+				result = bstTable.remove(val);
+				if (result)
+					cout << "Removed" << endl;
+				else
+					cout << "Not Done" << endl;
 			}
 			else {
-				cout << "Not Done" << endl;
+				cout << "Invalid table type selection." << endl;
 			}
 		}
 		// Search command
 		else if (command == '?') {
 			cin >> val;
 			cout << "Searching for " << val << "..." << endl;
-			result = arr.SearchItem(val, r, c);
-			if (result) {
-				cout << "Found at [" << r << "," << c << "]" << endl;
+			
+			if (tableChoice == '1') {
+				result = linkedTable.HashSearch(val);
+				if (result)
+					cout << "Found" << endl;
+				else
+					cout << "Not found" << endl;
+			}
+			else if (tableChoice == '2') {
+				result = lpTable.SearchItem(val, index);
+				if (result)
+					cout << "Found at index [" << index << "]" << endl;
+				else
+					cout << "Not found" << endl;
+			}
+			else if (tableChoice == '3') {
+				result = bstTable.search(val);
+				if (result)
+					cout << "Found" << endl;
+				else
+					cout << "Not found" << endl;
 			}
 			else {
-				cout << "Not found. Cursors set to [0,0]" << endl;
+				cout << "Invalid table type selection." << endl;
 			}
 		}
 		// Print Row Major
-		else if (command == 'R' || command == 'r') {
-			cout << "Row Major Output: " << endl;
-			arr.PrintRowMajor();
+		else if (command == 'P' || command == 'p') {
+			cout << "Hash Table Output:" << endl;
+			
+			if (tableChoice == '1') {
+				linkedTable.PrintHashTable();
+			}
+			else if (tableChoice == '2') {
+				lpTable.PrintHashTable();
+			}
+			else if (tableChoice == '3') {
+				bstTable.print();
+			}
+			else {
+				cout << "Invalid table type selection." << endl;
+			}
 		}
 		// Print Col Major
-		else if (command == 'C' || command == 'c') {
-			cout << "Column Major Output: " << endl;
-			arr.PrintColMajor();
+		else if (command == 'L' || command == 'l') {
+			if (tableChoice == '2') {
+				lpTable.PrintLoadFactor();
+			}
+			else {
+				cout << "Load factor display only applies to the linear probing table." << endl;
+			}
 		}
 		// Print Menu
 		else if (command == 'M' || command == 'm') {
@@ -90,8 +160,8 @@ int main() {
 			cout << "+ <-- Insert command (val, x pos, y pos)" << endl;
 			cout << "- <-- Remove command (removes value at cursor)" << endl;
 			cout << "? <-- Search command (searchVal)" << endl;
-			cout << "R/r <-- Print Row Major" << endl;
-			cout << "C/c <-- Print Col Major" << endl;
+			cout << "P/p <-- Print Hash Table" << endl;
+			cout << "L/l <-- Print load factor (linear probing)" << endl;
 			cout << "Q/q <-- Quit loop" << endl;
 			cout << "M/m <-- Menu command" << endl;
 		}
@@ -102,7 +172,7 @@ int main() {
 		// Handling invalid commands
 		else {
 			cout << "Invalid command. please choose from the following: " << endl;
-			cout << "(+, -, ?, R, C, M, or Q to quit)";
+			cout << "(+, -, ?, P, L, M, or Q to quit)";
 		}
 		// Spacer 
 		cout << STARS << endl;
