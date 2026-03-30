@@ -41,7 +41,7 @@ HashTableLP::~HashTableLP() {
  * author: Jay Neill
  **************************************************************/
 int HashTableLP::hashFunction(int val) {
-    return val % tableSize;
+    return ((val % tableSize) + tableSize) % tableSize;
 }
  
 /**************************************************************
