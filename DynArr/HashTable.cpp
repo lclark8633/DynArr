@@ -48,7 +48,7 @@ HashTable::~HashTable()
  * author: Jay Neill
  **************************************************************/
 int HashTable::hashFunction(int val) {
-    return val % TABLE_SIZE;
+    return ((val % TABLE_SIZE) + TABLE_SIZE) % TABLE_SIZE;
 }
 
 /**************************************************************
