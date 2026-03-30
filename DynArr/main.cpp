@@ -109,7 +109,7 @@ int main() {
 			if (tableChoice == '1') {
 				result = linkedTable.HashSearch(val);
 				if (result)
-					cout << "Found" << endl;
+					cout << "Found at bucket [" << (val % TABLE_SIZE) << "]" << endl;
 				else
 					cout << "Not found" << endl;
 			}
@@ -123,7 +123,7 @@ int main() {
 			else if (tableChoice == '3') {
 				result = bstTable.search(val);
 				if (result)
-					cout << "Found" << endl;
+					cout << "Found at bucket [" << (val % 10) << "]" << endl;
 				else
 					cout << "Not found" << endl;
 			}
