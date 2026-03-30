@@ -1,9 +1,12 @@
 /*
-* Names: Liam Clark, Jay Neill, Nathan Steward, John Grevins
+* Names: Liam Clark, Jay Neill, John Grevins
 * Class: CS-355
 */
 #include <iostream>
 #include "DynArr.h"
+#include "HashTable.h"
+#include "HashTableLP.h"
+#include "HashTableBST.h"
 using namespace std;
 
 const string STARS = "**********************************************";
