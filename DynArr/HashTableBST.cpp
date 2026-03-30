@@ -19,7 +19,7 @@ HashTableBST::HashTableBST() {
  * author: Liam Clark
  **************************************************************/
 int HashTableBST::hashFunction(int val) {
-    return val % TABLE_SIZE;
+    return ((val % TABLE_SIZE) + TABLE_SIZE) % TABLE_SIZE;
 }
 
 /**************************************************************
