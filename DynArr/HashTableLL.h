@@ -1,17 +1,19 @@
 #ifndef H_LLHASH
 #define H_LLHASH
+#include "LinkedList.h"
 
 const int TABLE_SIZE = 10;
 
-class HashTable {
+class HashTableLL {
 private:
     LinkedList<int> hashTable[TABLE_SIZE];
     int hashFunction(int val);
 public:
-    HashTable();
-    ~HashTable();
+    HashTableLL();
+    ~HashTableLL();
 
     void insert(int val);
+    void remove(int val);
     bool HashSearch(int val);
 
     void PrintHashTable();
