@@ -9,7 +9,7 @@
  **************************************************************/
 HashTableLL::HashTableLL() 
 {
-    cout << "Hash table created with " << TABLE_SIZE << " buckets" << endl; // linked lists initialize themselves
+    cout << "Hash table created with " << LL_TABLE_SIZE << " buckets" << endl; // linked lists initialize themselves
 }
 
 /**************************************************************
@@ -32,7 +32,7 @@ HashTableLL::~HashTableLL()
  * author: Jay Neill
  **************************************************************/
 int HashTableLL::hashFunction(int val) {
-    return val % TABLE_SIZE;
+    return val % LL_TABLE_SIZE;
 }
 
 /**************************************************************
@@ -58,11 +58,10 @@ void HashTableLL::insert(int val)
  * Output: Removes value from table
  * author: John Grevins
  **************************************************************/
-void HashTableLL::remove(int val)
+bool HashTableLL::remove(int val)
 {
     int index = hashFunction(val);
-
-    hashTable[index].Remove(val);
+    return hashTable[index].Remove(val);
 }
 
 /**************************************************************
@@ -88,7 +87,7 @@ bool HashTableLL::HashSearch(int val)
  **************************************************************/
 void HashTableLL::PrintHashTable() 
 {
-    for (int i = 0; i < TABLE_SIZE; i++)
+    for (int i = 0; i < LL_TABLE_SIZE; i++)
     {
           cout << "Bucket [" << i << "]: ";
 
@@ -104,3 +103,4 @@ void HashTableLL::PrintHashTable()
           cout << endl;
     }
 }
+
